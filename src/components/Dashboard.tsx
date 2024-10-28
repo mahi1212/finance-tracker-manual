@@ -40,7 +40,7 @@ export default function Dashboard({
   const [isAddingIncome, setIsAddingIncome] = useState(false)
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-2">
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
