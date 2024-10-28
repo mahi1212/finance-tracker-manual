@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Employee, Project, Expense, SalaryPayment } from '../types'
-import { Plus, Edit, DollarSign, Calendar, XCircle, ArrowUpDown } from 'lucide-react'
+import { Plus, Edit, DollarSign, Calendar, ArrowUpDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
