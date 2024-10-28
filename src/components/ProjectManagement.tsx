@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Project, Employee, Expense, Income, ProjectEmployee, ProjectPayment, SalaryPayment } from '../types'
+import { Project, Employee, Expense, Income, ProjectEmployee, ProjectPayment } from '../types' //SalaryPayment
 import { MoveRight, Plus, Users, Edit, Trash2 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,10 +22,10 @@ interface ProjectManagementProps {
 export default function ProjectManagement({
   projects,
   setProjects,
-  expenses,
-  setExpenses,
-  incomes,
-  setIncomes,
+  // expenses,
+  // setExpenses,
+  // incomes,
+  // setIncomes,
   employees,
   setEmployees,
 }: ProjectManagementProps) {
@@ -41,6 +41,8 @@ export default function ProjectManagement({
   const [projectSalary, setProjectSalary] = useState('')
   const [paymentAmount, setPaymentAmount] = useState('')
   const [paymentDate, setPaymentDate] = useState('')
+  console.log(showAddEmployeePopup, showProjectDetailsPopup, showAddPaymentPopup)
+
   const [paymentStatus, setPaymentStatus] = useState<'upcoming' | 'cancelled' | 'paid'>('upcoming')
   const [editingPaymentId, setEditingPaymentId] = useState<string | null>(null)
   const [showAddProjectSection, setShowAddProjectSection] = useState<boolean>(false)
@@ -212,35 +214,35 @@ export default function ProjectManagement({
     )
   }
 
-  const handlePaySalary = (employeeId: string, month: string, amount: number) => {
-    const newExpense: Expense = {
-      id: Date.now().toString(),
-      date: new Date().toISOString().slice(0, 10),
-      category: 'Salary',
-      amount,
-      description: `Salary payment for ${employeeId}`,
-      employeeId,
-      salaryMonth: month
-    }
+  // const handlePaySalary = (employeeId: string, month: string, amount: number) => {
+  //   const newExpense: Expense = {
+  //     id: Date.now().toString(),
+  //     date: new Date().toISOString().slice(0, 10),
+  //     category: 'Salary',
+  //     amount,
+  //     description: `Salary payment for ${employeeId}`,
+  //     employeeId,
+  //     salaryMonth: month
+  //   }
 
-    setExpenses([...expenses, newExpense])
+  //   setExpenses([...expenses, newExpense])
 
-    setEmployees(employees.map(emp => {
-      if (emp.id === employeeId) {
-        const salaryPayment: SalaryPayment = {
-          month,
-          amount,
-          datePaid: new Date().toISOString().slice(0, 10),
-          expenseId: newExpense.id
-        }
-        return {
-          ...emp,
-          salaryHistory: [...(emp.salaryHistory || []), salaryPayment]
-        }
-      }
-      return emp
-    }))
-  }
+  //   setEmployees(employees.map(emp => {
+  //     if (emp.id === employeeId) {
+  //       const salaryPayment: SalaryPayment = {
+  //         month,
+  //         amount,
+  //         datePaid: new Date().toISOString().slice(0, 10),
+  //         expenseId: newExpense.id
+  //       }
+  //       return {
+  //         ...emp,
+  //         salaryHistory: [...(emp.salaryHistory || []), salaryPayment]
+  //       }
+  //     }
+  //     return emp
+  //   }))
+  // }
 
   const handleDeleteEmployee = (employeeId: string) => {
     if (selectedProjectId) {
@@ -340,9 +342,9 @@ export default function ProjectManagement({
               <CardTitle>{project.name}</CardTitle>
               <Badge variant={
                 project.status === 'ongoing' ? "default" :
-                project.status === 'completed' ? "secondary" :
-                project.status === 'cancelled' ? "destructive" :
-                "outline"
+                  project.status === 'completed' ? "secondary" :
+                    project.status === 'cancelled' ? "destructive" :
+                      "outline"
               }>
                 {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
               </Badge>
@@ -396,8 +398,8 @@ export default function ProjectManagement({
                       <Input
                         type="text"
                         value={name}
-                        onChange={(e) => 
-                        setName(e.target.value)}
+                        onChange={(e) =>
+                          setName(e.target.value)}
                         required
                       />
                     </div>
@@ -532,8 +534,8 @@ export default function ProjectManagement({
                   }} className="space-y-4">
                     <div>
                       <label className="block mb-2">Employee</label>
-                      <Select 
-                        value={selectedEmployeeId} 
+                      <Select
+                        value={selectedEmployeeId}
                         onValueChange={(value) => {
                           setSelectedEmployeeId(value)
                           const employee = employees.find(emp => emp.id === value)

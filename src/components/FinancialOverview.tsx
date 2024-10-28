@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Expense, Income, Employee, Project, ProjectPayment } from '../types';
+import { Expense, Income, Employee, Project } from '../types'; //ProjectPayment
 import ExpenseList from './ExpenseList';
-import IncomeTable from './IncomeList';
+// import IncomeTable from './IncomeList';
 import IncomeList from './IncomeList';
 
 interface FinancialOverviewProps {
@@ -17,9 +17,9 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ expenses, incomes
   const [selectedMonth, setSelectedMonth] = useState(new Date().toISOString().slice(0, 7));
   // const [editingIncome, setEditingIncome] = useState<Income | null>(null);
   // const [editDate, setEditDate] = useState(''); //setIncomes removed from props
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editAmount, setEditAmount] = useState('');
-  const [editDescription, setEditDescription] = useState('');
+  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // const [editAmount, setEditAmount] = useState('');
+  // const [editDescription, setEditDescription] = useState('');
 
   const filteredExpenses = expenses.filter(expense => expense.date.startsWith(selectedMonth));
   const filteredIncomes = incomes.filter(income => income.date.startsWith(selectedMonth));
@@ -38,13 +38,13 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ expenses, incomes
     return project ? project.name : '';
   };
 
-  const getEmployeeDetails = (expense: Expense) => {
-    if (expense.category === 'Salary' && expense.employeeId) {
-      const employee = employees.find(emp => emp.id === expense.employeeId);
-      return employee ? ` - ${employee.name} (${expense.salaryMonth})` : '';
-    }
-    return '';
-  };
+  // const getEmployeeDetails = (expense: Expense) => {
+  //   if (expense.category === 'Salary' && expense.employeeId) {
+  //     const employee = employees.find(emp => emp.id === expense.employeeId);
+  //     return employee ? ` - ${employee.name} (${expense.salaryMonth})` : '';
+  //   }
+  //   return '';
+  // };
 
   // const handleEditClick = (incomeOrPayment: Income | ProjectPayment) => {
   //   setEditingIncome(incomeOrPayment as Income);
@@ -73,7 +73,7 @@ const FinancialOverview: React.FC<FinancialOverviewProps> = ({ expenses, incomes
   // };
 
   const cardClass = `p-4 rounded shadow ${darkMode ? 'bg-gray-800' : 'bg-white'}`;
-  const tableClass = `w-full ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'}`;
+  // const tableClass = `w-full ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'}`;
 
   return (
     <div>

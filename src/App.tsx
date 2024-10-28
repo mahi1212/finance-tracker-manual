@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect } from 'react'
-import { Sun, Moon, Settings, ArrowLeftRight } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Settings, ArrowLeftRight } from 'lucide-react'
 import CompanySetup from './components/CompanySetup'
 import Dashboard from './components/Dashboard'
 import { CompanyData, Expense, Income, Employee, Project } from './types'
