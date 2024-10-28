@@ -29,8 +29,8 @@ const CompanySetup: React.FC<CompanySetupProps> = ({ setCompanyData, companyData
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Company Setup</h2>
-      <p className="mb-6 text-center">Choose your company type:</p>
+      <h2 className="text-2xl font-bold mb-6 text-center">Select a mood</h2>
+      <p className="mb-6 text-center">We offer both comapany and solo mood. You can switch anytime you want</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div
           className={`${cardClass} ${
@@ -73,7 +73,7 @@ const CompanySetup: React.FC<CompanySetupProps> = ({ setCompanyData, companyData
           onClick={handleSetup}
           disabled={!companyType}
         >
-          {companyData ? 'Update Company Type' : 'Continue'}
+          {companyData ? 'Switch Mood' : 'Continue'}
         </button>
       </div>
     </div>

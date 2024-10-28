@@ -134,7 +134,7 @@ export default function Dashboard({
                   projects={projects}
                   expenses={expenses}
                   setExpenses={setExpenses}
-                  darkMode={darkMode}
+                  // darkMode={darkMode}
                 />
               </CardContent>
             </Card>
@@ -156,7 +156,7 @@ export default function Dashboard({
                 setIncomes={setIncomes}
                 employees={employees}
                 setEmployees={setEmployees}
-                darkMode={darkMode}
+                // darkMode={darkMode}
               />
             </CardContent>
           </Card>

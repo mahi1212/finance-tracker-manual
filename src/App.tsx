@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Settings } from 'lucide-react';
+import { Sun, Moon, Settings, ArrowLeftRight } from 'lucide-react';
 import CompanySetup from './components/CompanySetup';
 import Dashboard from './components/Dashboard';
 import { CompanyData, Expense, Income, Employee, Project } from './types';
+import { Toaster } from './components/ui/toaster';
+import { toast } from './hooks/use-toast';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -59,24 +61,33 @@ function App() {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-      <div className="container mx-auto px-4 py-8">
-        <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Company Finance Manager</h1>
+      <Toaster />
+      <div className="container mx-auto py-8 max-w-7xl ">
+        <header className="flex justify-between items-center mb-8 sm:px-4 px-2">
+          <h1 className="text-3xl font-bold">Finance tracker</h1>
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setShowSetup(true)}
-              className={`p-2 rounded-full ${
-                darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100'
-              } transition-colors duration-200`}
+              onClick={() => {
+                companyData?.type == 'solo' ?
+                  setCompanyData({ type: 'withEmployees' }) :
+                  setCompanyData({ type: 'solo' })
+
+                toast({
+                  title: companyData?.type == 'solo' ? "Switched to COMPANY mood" : "Switched to SOLO mood",
+                  description: companyData?.type == 'solo' ? "Manage your employee" : "No employee here to manage!",
+                })
+
+              }}
+              className={`p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100'
+                } transition-colors duration-200`}
               title="Company Settings"
             >
-              <Settings size={24} />
+              <ArrowLeftRight size={24} />
             </button>
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-full ${
-                darkMode ? 'bg-yellow-400 text-gray-900' : 'bg-gray-800 text-white'
-              }`}
+              className={`p-2 rounded-full ${darkMode ? 'bg-yellow-400 text-gray-900' : 'bg-gray-800 text-white'
+                }`}
               title={darkMode ? 'Light Mode' : 'Dark Mode'}
             >
               {darkMode ? <Sun size={24} /> : <Moon size={24} />}
@@ -84,10 +95,10 @@ function App() {
           </div>
         </header>
         {(showSetup || !companyData) ? (
-          <CompanySetup 
-            setCompanyData={handleCompanySetup} 
+          <CompanySetup
+            setCompanyData={handleCompanySetup}
             companyData={companyData}
-            darkMode={darkMode} 
+            darkMode={darkMode}
           />
         ) : (
           <Dashboard

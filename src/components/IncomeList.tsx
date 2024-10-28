@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
 
 interface Income {
   id: string;
@@ -19,28 +20,28 @@ const IncomeList: React.FC<IncomeListProps> = ({ incomes, darkMode, getProjectNa
   return (
     <div>
       <div className={`overflow-x-auto ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded shadow`}>
-        <table className="w-full">
-          <thead>
-            <tr className={`${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
-              <th className="p-2 text-left">Date</th>
-              <th className="p-2 text-left">Source</th>
-              <th className="p-2 text-left">Project</th>
-              <th className="p-2 text-left">Amount</th>
-              <th className="p-2 text-left">Description</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table className="w-full">
+          <TableHeader>
+            <TableRow className={`${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
+              <TableHead className="p-2 text-left">Date</TableHead>
+              <TableHead className="p-2 text-left">Source</TableHead>
+              <TableHead className="p-2 text-left">Project</TableHead>
+              <TableHead className="p-2 text-left">Amount</TableHead>
+              <TableHead className="p-2 text-left">Description</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {incomes.map((income) => (
-              <tr key={income.id} className={`${darkMode ? 'border-gray-700' : 'border-gray-200'} border-t`}>
-                <td className="p-2">{income.date}</td>
-                <td className="p-2">{income.source || 'Client Payment'}</td>
-                <td className="p-2">{getProjectName(income.projectId || '')}</td>
-                <td className="p-2">${income.amount.toFixed(2)}</td>
-                <td className="p-2">{income.description || 'Payment received'}</td>
-              </tr>
+              <TableRow key={income.id} className={`${darkMode ? 'border-gray-700' : 'border-gray-200'} border-t`}>
+                <TableCell className="p-2">{income.date}</TableCell>
+                <TableCell className="p-2">{income.source || 'Client Payment'}</TableCell>
+                <TableCell className="p-2">{getProjectName(income.projectId || '')}</TableCell>
+                <TableCell className="p-2">${income.amount.toFixed(2)}</TableCell>
+                <TableCell className="p-2">{income.description || 'Payment received'}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
